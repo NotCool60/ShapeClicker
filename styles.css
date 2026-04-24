@@ -192,6 +192,26 @@ body {
   cursor: not-allowed;
 }
 
+.prestige-btn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 18px;
+  padding: 12px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.prestige-btn:hover {
+  background: #ff5252;
+}
+
+.prestige-btn:disabled {
+  background: var(--muted);
+  cursor: not-allowed;
+}
+
 @media (max-width: 900px) {
   .main-grid {
     grid-template-columns: 1fr;
