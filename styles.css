@@ -164,6 +164,34 @@ body {
   background: var(--accent-soft);
 }
 
+.upgrade-card {
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: var(--shadow);
+}
+
+.upgrade-card.owned {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.upgrade-card h4 {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+}
+
+.upgrade-card p {
+  margin: 4px 0;
+  font-size: 0.85rem;
+}
+
+.upgrade-card .buy-btn:disabled {
+  background: var(--muted);
+  cursor: not-allowed;
+}
+
 @media (max-width: 900px) {
   .main-grid {
     grid-template-columns: 1fr;
