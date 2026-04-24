@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShapeClicker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="status-bar">
+      <div class="status-item">
+        <span class="label">Shapes</span>
+        <span id="shape-count" class="value">0</span>
+      </div>
+      <div class="status-item">
+        <span class="label">Per Click</span>
+        <span id="shape-click-value" class="value">1</span>
+      </div>
+      <div class="status-item">
+        <span class="label">Per Second</span>
+        <span id="shape-ps-value" class="value">0</span>
+      </div>
+      <div class="status-item">
+        <span class="label">Prestige</span>
+        <span id="prestige-value" class="value">0</span>
+      </div>
+    </header>
+
+    <main class="main-grid">
+      <section class="center-panel">
+        <div id="shape-target" class="shape-target">
+          <svg viewBox="0 0 100 100" class="shape-svg" aria-hidden="true">
+            <polygon points="50,5 95,30 80,85 20,85 5,30" />
+          </svg>
+          <div class="shape-label">Click Me</div>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <h2>Upgrades</h2>
+        <div id="upgrade-list" class="upgrade-list">
+          <p class="placeholder">Upgrades will appear here.</p>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
