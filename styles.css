@@ -124,6 +124,46 @@ body {
   color: var(--muted);
 }
 
+.building-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.building-card {
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.building-card h3 {
+  margin: 0 0 12px 0;
+  font-size: 1.1rem;
+}
+
+.building-card p {
+  margin: 6px 0;
+  font-size: 0.9rem;
+}
+
+.buy-btn {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.buy-btn:hover {
+  background: var(--accent-soft);
+}
+
 @media (max-width: 900px) {
   .main-grid {
     grid-template-columns: 1fr;
