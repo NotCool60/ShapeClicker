@@ -42,6 +42,20 @@ body {
   border-radius: 18px;
   padding: 18px 20px;
   box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.status-item:last-child {
+  grid-column: span 1;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .label {
@@ -88,11 +102,20 @@ body {
   transform: translateY(-3px);
 }
 
+.shape-target:active {
+  transform: scale(0.95);
+}
+
 .shape-svg {
   width: 70%;
   height: 70%;
   fill: #56b6c2;
   filter: drop-shadow(0 16px 30px rgba(0, 0, 0, 0.25));
+  transition: filter 0.2s ease;
+}
+
+.shape-target:hover .shape-svg {
+  filter: drop-shadow(0 20px 40px rgba(86, 182, 194, 0.4));
 }
 
 .shape-label {
@@ -137,6 +160,12 @@ body {
   border-radius: 16px;
   padding: 16px;
   box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.building-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
 }
 
 .building-card h3 {
@@ -149,6 +178,12 @@ body {
   font-size: 0.9rem;
 }
 
+.total-production {
+  color: var(--accent);
+  font-weight: 600;
+  margin: 8px 0 12px 0 !important;
+}
+
 .buy-btn {
   background: var(--accent);
   color: var(--bg);
@@ -157,11 +192,26 @@ body {
   padding: 8px 16px;
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, transform 0.1s ease;
+  width: 100%;
+  margin-top: 12px;
 }
 
-.buy-btn:hover {
+.buy-btn:hover:not(:disabled) {
   background: var(--accent-soft);
+  transform: scale(1.02);
+}
+
+.buy-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.buy-btn:disabled,
+.buy-btn.unaffordable {
+  background: #6c757d;
+  color: #adb5bd;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .upgrade-card {
@@ -170,10 +220,15 @@ body {
   border-radius: 12px;
   padding: 12px;
   box-shadow: var(--shadow);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.upgrade-card:hover:not(.owned) {
+  transform: translateY(-2px);
 }
 
 .upgrade-card.owned {
-  opacity: 0.6;
+  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -187,9 +242,12 @@ body {
   font-size: 0.85rem;
 }
 
-.upgrade-card .buy-btn:disabled {
-  background: var(--muted);
-  cursor: not-allowed;
+button {
+  font-family: inherit;
+}
+
+button[title] {
+  cursor: help;
 }
 
 .prestige-btn {
@@ -200,20 +258,98 @@ body {
   padding: 12px 20px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
-.prestige-btn:hover {
+.prestige-btn:hover:not(:disabled) {
   background: #ff5252;
+  transform: scale(1.02);
+}
+
+.prestige-btn:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 .prestige-btn:disabled {
   background: var(--muted);
   cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.clear-save-btn {
+  width: 100%;
+  margin-top: 18px;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  font-size: 0.9rem;
+}
+
+.clear-save-btn:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+}
+
+.clear-save-btn:active {
+  transform: translateY(0);
 }
 
 @media (max-width: 900px) {
   .main-grid {
     grid-template-columns: 1fr;
+  }
+
+  .status-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .building-list {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .app-shell {
+    padding: 12px;
+  }
+
+  .status-bar {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .status-item {
+    padding: 12px 14px;
+  }
+
+  .label {
+    font-size: 0.75rem;
+  }
+
+  .value {
+    font-size: 1.2rem;
+  }
+
+  .center-panel,
+  .sidebar {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .building-list {
+    grid-template-columns: 1fr;
+  }
+
+  .shape-target {
+    width: 100%;
+  }
+
+  .upgrade-list {
+    min-height: auto;
   }
 }
