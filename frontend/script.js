@@ -38,27 +38,53 @@ const state = {
 
 updateShapesPerSecond();
 
+const API_BASE_URL = 'http://localhost:5212/api/game';
+const USER_ID = 'default'; // For now, single user
+
 function saveGame() {
-  localStorage.setItem('shapeclicker-save', JSON.stringify(state));
+  fetch(`${API_BASE_URL}/save?userId=${USER_ID}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(state),
+  })
+  .then(response => response.ok ? console.log('Game saved') : console.error('Save failed'))
+  .catch(error => console.error('Save error:', error));
 }
 
 function loadGame() {
-  const saved = localStorage.getItem('shapeclicker-save');
-  if (saved) {
-    try {
-      const loaded = JSON.parse(saved);
-      Object.assign(state, loaded);
-      updateShapesPerSecond();
-    } catch (e) {
-      console.error('Failed to load save:', e);
+  fetch(`${API_BASE_URL}/load?userId=${USER_ID}`)
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      console.log('No saved game found');
+      return null;
     }
-  }
+  })
+  .then(data => {
+    if (data) {
+      Object.assign(state, data);
+      updateShapesPerSecond();
+    }
+  })
+  .catch(error => console.error('Load error:', error));
 }
 
 function clearSave() {
   if (confirm('Are you sure you want to delete your save? This cannot be undone.')) {
-    localStorage.removeItem('shapeclicker-save');
-    location.reload();
+    fetch(`${API_BASE_URL}/delete?userId=${USER_ID}`, {
+      method: 'DELETE',
+    })
+    .then(response => {
+      if (response.ok) {
+        location.reload();
+      } else {
+        console.error('Delete failed');
+      }
+    })
+    .catch(error => console.error('Delete error:', error));
   }
 }
 
